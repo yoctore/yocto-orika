@@ -19,3 +19,5 @@ deploy:
   on:
     tags: true
     repo: yoctore/yocto-orika
+before_install: npm install -g grunt-cli
+install: npm install
