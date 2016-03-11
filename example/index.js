@@ -1,45 +1,55 @@
 'use strict';
 
-var _ = require('lodash');
+var _       = require('lodash');
+var nock    = require('nock');
+var moment  = require('moment');
 
-var host      = '127.0.0.1';
+var host      = 'http://www.example.com';
 var user      = 'user';
 var password  = 'password';
 
 var config = {
   order : {
     url : '/orkaisse/drive/api/order',
-    value : {
-      idm   : 1,
-      idtrs : '123132',
-      idcli : '1234567894561',
-      items : [ { ean : '1234567894561', qte : 5, typ : 1 } ]
+    request : {
+      method : 'POST',
+      body : {
+        idm   : 1,
+        idtrs : '123132',
+        idcli : '1234567894561',
+        items : [ { ean : '1234567894561', qte : 5, typ : 1 } ]
+      }
+    },
+    response : {
+      status  : 200,
+      body    : {
+        idm     : 1,
+        dt      : moment().format('YYYY-MM-DD'),
+        idtrs   : '123132',
+        idcli   : '1234567894561',
+        idtkt   : '111111111111111111111111',
+        netttc  : 8.89,
+        mntavg  : 2.36,
+        items   : [ { ean : '1234567894561', qte : 5, typ : 1, puvttc : 4.33, netttc : 1, mntavg : 3 } ],
+        lots    : [ { idlot : "3", articles : [ { ean : '1234567894561', qte : 1 } ] }  ]
+      }
     }
   }
 };
 
-// define mock
-var nock = require('nock');
+var req = nock(host);
 
-// order request
-//var req = nock('http://'+host+':80');
-
-/*_.forOwn(config, function (value, key) {
-	// post
-	req.post(value.url, value.value).reply(200, {
-		username: 'davidwalshblog',
-		firstname: 'David'
-	});
-});*/
+_.forOwn(config, function (value, key) {
+  req.intercept(value.url, value.request.method).reply(value.response.status, value.response.body);
+});
 
 var api = require('../src/')();
-api.init();
-return false;
+
 // test init
-if (api.init(user, password, host)) {
+if (api.init(user, password, host.replace('http://', ''))) {
   if (api.isReady()) {
     //console.log('build =>', api.orkaisse().build('order', {}));
-    api.orkaisse().order(config.order.value).then(function (success) {
+    api.orkaisse().order(config.order.request.body).then(function (success) {
       console.log('s =>', success);
     }).catch(function (error) {
       console.log('e =>', error);

@@ -27,7 +27,7 @@ function YoctoOrika (l) {
    *
    * Current version of api
    */
-  this.version = '1.0.0';
+  this.version = '1.0.3';
 
   /**
    * Default included modules
