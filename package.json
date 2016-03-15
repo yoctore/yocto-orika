@@ -1,7 +1,7 @@
 {
   "name": "yocto-orika",
   "description": "An utility tools to mange request to orika API ",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "scripts": {
     "test": "grunt test"
   },
@@ -34,7 +34,7 @@
     "url": "https://github.com/yoctore/yocto-orika/issues"
   },
   "files": [
-    "app",
+    "dist",
     "README.md",
     "CHANGELOG.md",
     "LICENSE-2.0.txt"
