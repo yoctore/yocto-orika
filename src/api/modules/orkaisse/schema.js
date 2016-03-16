@@ -36,14 +36,14 @@ OrkaisseSchema.prototype.get = function (name) {
         typ         : joi.number().required().valid([ 0, 1 ]),
         replacement : joi.object().optional().keys({
           ean     : joi.string().required().empty().min(13).max(13),
-          puvttc  : joi.number().required().positive().precision(2)
+          puvttc  : joi.number().required().min(0).precision(2)
         })
       })),
       vouchers  : joi.array().optional().items(joi.string().required().empty()),
       netttc    : joi.number().required().positive().precision(2),
       payments  : joi.array().required().items(joi.object().required().keys({
         idreg   : joi.number().required().min(1),
-        mntttc  : joi.number().required().positive().precision(2)
+        mntttc  : joi.number().required().min(0).precision(2)
       }))
     },
     response  : {
@@ -53,15 +53,15 @@ OrkaisseSchema.prototype.get = function (name) {
       idtrs     : joi.string().required().empty(),
       idcli     : joi.string().required().empty().min(13).max(13),
       idtkt     : joi.string().required().empty().min(24).max(24),
-      netttc    : joi.number().required().positive().precision(2),
-      mntavg    : joi.number().required().positive().precision(2),
+      netttc    : joi.number().required().min(0).precision(2),
+      mntavg    : joi.number().required().min(0).precision(2),
       items     : joi.array().required().items(joi.object().required().keys({
         ean     : joi.string().required().empty().min(13).max(13),
         qte     : joi.number().required().min(0),
         typ     : joi.number().required().valid([ 0, 1 ]),
-        puvttc  : joi.number().required().positive().precision(2),
-        netttc  : joi.number().required().positive().precision(2),
-        mntavg  : joi.number().required().positive().precision(2)
+        puvttc  : joi.number().required().min(0).precision(2),
+        netttc  : joi.number().required().min(0).precision(2),
+        mntavg  : joi.number().required().min(0).precision(2)
       })),
       lots      : joi.array().optional().items(joi.object().required().keys({
         idlot     : joi.string().required().empty(),
