@@ -113,7 +113,7 @@ OrikaCore.prototype.process = function (schema, action, endpoint, data) {
     if (!validate.error) {
       // process core request
       this.request.process(this.host, endpoint, action,
-                           this.required, data).then(function (success) {
+                           this.required, validate.value).then(function (success) {
         // validate current schema
         validate = joi.validate(success, schema.response, { abortEarly : false });
 
