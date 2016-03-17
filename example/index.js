@@ -48,12 +48,19 @@ var api = require('../src/')();
 // test init
 if (api.init(user, password, host.replace('http://', ''))) {
   if (api.isReady()) {
+
+    var b = config.order.request.body;
+    b.items = _.flatten([ b.items, b.items ]);
+    api.orkaisse().order(b);
+
     //console.log('build =>', api.orkaisse().build('order', {}));
     api.orkaisse().order(config.order.request.body).then(function (success) {
       console.log('s =>', success);
     }).catch(function (error) {
       console.log('e =>', error);
     });
+
+
   }
 } else  {
   console.log('invalid init');

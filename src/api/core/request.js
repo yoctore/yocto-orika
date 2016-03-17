@@ -65,7 +65,7 @@ ApiRequest.prototype.process = function (host, endpoint, method, required, data)
   // normalize host
   host = [ host, endpoint, method ].join('/');
   // default merged data to use
-  data = _.merge(required, { data : data });
+  data = _.merge(_.clone(required), { data : data });
   // prepare request
   if (this.prepare(host, data)) {
     // debug message
