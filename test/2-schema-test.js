@@ -37,10 +37,10 @@ var modules = {
       label : 'Must contains keys gived on initial CIT (Response only)',
       value : [ 'order', 'prepare', 'paid', 'cancel' ],
       items : {
-        order   : [ 'idm', 'dt', 'idtrs', 'idcli', 'idtkt', 'netttc', 'mntavg', 'items', 'lots' ],
-        prepare : [ 'idm', 'dt', 'idtrs', 'idcli', 'idtkt', 'netttc', 'mntavg', 'items' ],
-        paid    : [ 'retour' ],
-        cancel  : [ 'retour' ]
+        order   : [ 'status', 'idm', 'dt', 'idtrs', 'idcli', 'idtkt', 'netttc', 'mntavg', 'items', 'lots' ],
+        prepare : [ 'status', 'idm', 'dt', 'idtrs', 'idcli', 'idtkt', 'netttc', 'mntavg', 'items' ],
+        paid    : [ 'status', 'retour' ],
+        cancel  : [ 'status', 'retour' ]
       }
     }
   }

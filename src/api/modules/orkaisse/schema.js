@@ -27,19 +27,21 @@ OrkaisseSchema.prototype.get = function (name) {
     request   : {
       idm       : joi.number().required().min(1),
       dt        : joi.date().default(moment().format('YYYY-MM-DD')),
-      idtrs     : joi.string().required().empty(),
-      idcli     : joi.string().required().empty().min(13).max(13),
-      idtkt     : joi.string().required().empty().min(24).max(24),
+      idtrs     : joi.string().required().trim().empty(),
+      idcli     : joi.string().required().trim().empty().min(13).max(13),
+      idtkt     : joi.string().required().trim().empty().min(24).max(24),
       items     : joi.array().required().items(joi.object().required().keys({
-        ean         : joi.string().required().empty().min(13).max(13),
+        ean         : joi.string().required().trim().empty().min(13).max(13),
         qte         : joi.number().required().min(0),
-        typ         : joi.number().required().valid([ 0, 1 ]),
         replacement : joi.object().optional().keys({
-          ean     : joi.string().required().empty().min(13).max(13),
+          ean     : joi.string().required().trim().empty().min(13).max(13),
           puvttc  : joi.number().required().min(0).precision(2)
         })
       })),
-      vouchers  : joi.array().optional().items(joi.string().required().empty()),
+      vouchers  : joi.array().optional().items(joi.object().required().keys({
+        ean         : joi.string().required().trim().empty().min(13).max(13),
+        typ         : joi.number().required().valid([ 0, 1 ])
+      })),
       netttc    : joi.number().required().positive().precision(2),
       payments  : joi.array().required().items(joi.object().required().keys({
         idreg   : joi.number().required().min(1),
@@ -47,26 +49,27 @@ OrkaisseSchema.prototype.get = function (name) {
       }))
     },
     response  : {
+      status    : joi.number().required().valid([ 0, 1 ]),
       retour    : joi.number().required().valid([ 0, 1, 2 ]),
       idm       : joi.number().required().min(1),
       dt        : joi.date().required().format('YYYY-MM-DD'),
-      idtrs     : joi.string().required().empty(),
-      idcli     : joi.string().required().empty().min(13).max(13),
-      idtkt     : joi.string().required().empty().min(24).max(24),
+      idtrs     : joi.string().required().trim().empty(),
+      idcli     : joi.string().required().trim().empty().min(13).max(13),
+      idtkt     : joi.string().required().trim().empty().min(24).max(24),
       netttc    : joi.number().required().min(0).precision(2),
       mntavg    : joi.number().required().min(0).precision(2),
       items     : joi.array().required().items(joi.object().required().keys({
-        ean     : joi.string().required().empty().min(13).max(13),
+        ean     : joi.string().required().trim().empty().min(13).max(13),
         qte     : joi.number().required().min(0),
-        typ     : joi.number().required().valid([ 0, 1 ]),
         puvttc  : joi.number().required().min(0).precision(2),
         netttc  : joi.number().required().min(0).precision(2),
+        netht   : joi.number().required().min(0).precision(2),
         mntavg  : joi.number().required().min(0).precision(2)
       })),
       lots      : joi.array().optional().items(joi.object().required().keys({
-        idlot     : joi.string().required().empty(),
+        idlot     : joi.string().required().trim().empty(),
         articles  : joi.array().required().items(joi.object().required().keys({
-          ean : joi.string().required().empty().min(13).max(13),
+          ean : joi.string().required().trim().empty().min(13).max(13),
           qte : joi.number().required().min(0)
         }))
       }))
@@ -74,19 +77,21 @@ OrkaisseSchema.prototype.get = function (name) {
     rules     : {
       order   : {
         request   : [ 'idm', 'dt', 'idtrs', 'idcli', 'items', 'vouchers' ],
-        response  : [ 'idm', 'dt', 'idtrs', 'idcli', 'idtkt', 'netttc', 'mntavg', 'items', 'lots' ]
+        response  : [ 'status', 'idm', 'dt', 'idtrs', 'idcli',
+                      'idtkt', 'netttc', 'mntavg', 'items', 'lots' ]
       },
       prepare : {
         request   : [ 'idm', 'dt', 'idtrs', 'idcli', 'idtkt', 'items', 'vouchers' ],
-        response  : [ 'idm', 'dt', 'idtrs', 'idcli', 'idtkt', 'netttc', 'mntavg', 'items' ]
+        response  : [ 'status', 'idm', 'dt', 'idtrs', 'idcli',
+                      'idtkt', 'netttc', 'mntavg', 'items' ]
       },
       paid    : {
         request   : [ 'idm', 'dt', 'idtrs', 'idtkt', 'netttc', 'payments' ],
-        response  : [ 'retour' ]
+        response  : [ 'status', 'retour' ]
       },
       cancel  : {
         request   : [ 'idm', 'dt', 'idtrs', 'idcli', 'idtkt' ],
-        response  : [ 'retour' ]
+        response  : [ 'status', 'retour' ]
       }
     }
   };
