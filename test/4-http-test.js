@@ -46,6 +46,7 @@ var modules = {
           idtrs   : '123132',
           idcli   : '1234567894561',
           idtkt   : '111111111111111111111111',
+          netht   : 7.50,
           netttc  : 8.89,
           mntavg  : 2.36,
           items   : [ { ean : '1234567894561', qte : 5, netht : 3.25, puvttc : 4.33, netttc : 1, mntavg : 3 } ],

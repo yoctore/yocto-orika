@@ -57,6 +57,7 @@ OrkaisseSchema.prototype.get = function (name) {
       idcli     : joi.string().required().trim().empty().min(13).max(13),
       idtkt     : joi.string().required().trim().empty().min(24).max(24),
       netttc    : joi.number().required().min(0).precision(2),
+      netht     : joi.number().required().min(0).precision(2),
       mntavg    : joi.number().required().min(0).precision(2),
       items     : joi.array().required().items(joi.object().required().keys({
         ean     : joi.string().required().trim().empty().min(13).max(13),
@@ -78,7 +79,7 @@ OrkaisseSchema.prototype.get = function (name) {
       order   : {
         request   : [ 'idm', 'dt', 'idtrs', 'idcli', 'items', 'vouchers' ],
         response  : [ 'status', 'idm', 'dt', 'idtrs', 'idcli',
-                      'idtkt', 'netttc', 'mntavg', 'items', 'lots' ]
+                      'idtkt', 'netttc', 'netht', 'mntavg', 'items', 'lots' ]
       },
       prepare : {
         request   : [ 'idm', 'dt', 'idtrs', 'idcli', 'idtkt', 'items', 'vouchers' ],
