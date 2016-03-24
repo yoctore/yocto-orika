@@ -152,6 +152,8 @@ OrikaCore.prototype.process = function (schema, action, endpoint, data) {
       // error message
       this.logger.error([ '[ YoctoOrika.OrikaCore.process ] - Cannot process',
                             action, ':', validate.error ].join(' '));
+      // reject with error
+      deferred.reject(validate.error);
     }
   } else {
     // reject from given action
