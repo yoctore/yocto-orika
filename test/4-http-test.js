@@ -34,7 +34,7 @@ var modules = {
           idm   : 1,
           idtrs : '123132',
           idcli : '1234567894561',
-          items : [ { ean : '1234567894561', qte : 5 } ]
+          items : [ { ean : '1234567894561', qte : 5, puvttc : 1.40 } ]
         }
       },
       response : {
