@@ -17,12 +17,13 @@ var config = {
         idm   : 1,
         idtrs : '123132',
         idcli : '1234567894561',
-        items : [ { ean : '1234567894561', qte : 5, typ : 1 } ]
+        items : [ { ean : '1234567894561', qte : 5 } ]
       }
     },
     response : {
       status  : 200,
       body    : {
+        status  : 0,
         idm     : 1,
         dt      : moment().format('YYYY-MM-DD'),
         idtrs   : '123132',
@@ -30,7 +31,8 @@ var config = {
         idtkt   : '111111111111111111111111',
         netttc  : 8.89,
         mntavg  : 2.36,
-        items   : [ { ean : '1234567894561', qte : 5, typ : 1, puvttc : 4.33, netttc : 1, mntavg : 3 } ],
+        netht   : 1.00,
+        items   : [ { ean : '1234567894561', qte : 5,  puvttc : 4.33, netttc : 1, mntavg : 3, netht : 1.00 } ],
         lots    : [ { idlot : "3", articles : [ { ean : '1234567894561', qte : 1 } ] }  ]
       }
     }

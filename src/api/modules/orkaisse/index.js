@@ -76,7 +76,7 @@ Orkaisse.prototype.isReady = function () {
  */
 Orkaisse.prototype.order = function (data) {
   // default statement
-  return this.process('order', data);
+  return this.process('order', null, data);
 };
 
 /**
@@ -87,7 +87,7 @@ Orkaisse.prototype.order = function (data) {
  */
 Orkaisse.prototype.prepare = function (data) {
   // default statement
-  return this.process('prepare', data);
+  return this.process('prepare', 'sale', data);
 };
 
 /**
@@ -98,7 +98,7 @@ Orkaisse.prototype.prepare = function (data) {
  */
 Orkaisse.prototype.paid = function (data) {
   // default statement
-  return this.process('paid', data);
+  return this.process('paid', 'sale', data);
 };
 
 /**
@@ -109,7 +109,7 @@ Orkaisse.prototype.paid = function (data) {
  */
 Orkaisse.prototype.cancel = function (data) {
   // default statement
-  return this.process('cancel', data);
+  return this.process('cancel', 'sale', data);
 };
 
 /**
@@ -133,12 +133,14 @@ Orkaisse.prototype.build = function (action, data) {
  * Default process method
  *
  * @param {String} action action default action to use on core process
+ * @param {String} pre if we must provide an a prefix on action
  * @param {Object} data data to use on given request
  * @return {Object} default promise to catch
  */
-Orkaisse.prototype.process = function (action, data) {
+Orkaisse.prototype.process = function (action, pre, data) {
   // default statement
-  return this.core.process(this.schema.get(action), action, this.endpoint, data);
+  return this.core.process(this.schema.get(action),
+    pre ? [ pre, action ].join('/') : action, this.endpoint, data);
 };
 
 // Default export
