@@ -33,11 +33,13 @@ OrkaisseSchema.prototype.get = function (name) {
       items     : joi.array().required().items(joi.object().required().keys({
         ean         : joi.string().required().trim().empty().min(13).max(13),
         qte         : joi.number().required().min(0),
-        replacement : joi.object().optional().keys({
+        replacement : joi.array().min(1).items(joi.object().optional().keys({
           ean     : joi.string().required().trim().empty().min(13).max(13),
-          puvttc  : joi.number().required().min(0).precision(2)
-        })
+          puvttc  : joi.number().required().min(0).precision(2),
+          qte     : joi.number().required().min(0)
+        }))
       })),
+      puvttc    : joi.number().required().min(0).precision(2),
       vouchers  : joi.array().optional().items(joi.object().required().keys({
         ean         : joi.string().required().trim().empty().min(13).max(13),
         typ         : joi.number().required().valid([ 0, 1 ])
@@ -82,7 +84,7 @@ OrkaisseSchema.prototype.get = function (name) {
                       'idtkt', 'netttc', 'netht', 'mntavg', 'items', 'lots' ]
       },
       prepare : {
-        request   : [ 'idm', 'dt', 'idtrs', 'idcli', 'idtkt', 'items', 'vouchers' ],
+        request   : [ 'idm', 'dt', 'idtrs', 'idcli', 'idtkt', 'items', 'vouchers', 'puvttc' ],
         response  : [ 'status', 'idm', 'dt', 'idtrs', 'idcli',
                       'idtkt', 'netttc', 'mntavg', 'items' ]
       },

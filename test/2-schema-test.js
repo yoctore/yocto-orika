@@ -28,7 +28,7 @@ var modules = {
       value : [ 'order', 'prepare', 'paid', 'cancel' ],
       items : {
         order   : [ 'idm', 'dt', 'idtrs', 'idcli', 'items', 'vouchers' ],
-        prepare : [ 'idm', 'dt', 'idtrs', 'idcli', 'idtkt', 'items', 'vouchers' ],
+        prepare : [ 'idm', 'dt', 'idtrs', 'idcli', 'idtkt', 'items', 'vouchers', 'puvttc' ],
         paid    : [ 'idm', 'dt', 'idtrs', 'idtkt', 'netttc', 'payments' ],
         cancel  : [ 'idm', 'dt', 'idtrs', 'idcli', 'idtkt' ]
       }
