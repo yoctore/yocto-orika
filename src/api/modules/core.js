@@ -4,7 +4,6 @@ var logger    = require('yocto-logger');
 var _         = require('lodash');
 var joi       = require('joi');
 var Q         = require('q');
-var utils     = require('yocto-utils');
 
 /**
  * Default Orkia API core module - Provide required data to any orika request
@@ -120,19 +119,8 @@ OrikaCore.prototype.process = function (schema, action, endpoint, data) {
 
         // has no error on response (structure only) ?
         if (!validate.error) {
-          // check if status === 0 (no errors)
-          if (validate.value.status === 0) {
-            // resolve with success response
-            deferred.resolve(validate.value);
-          } else {
-            // log error
-            this.logger.error([ '[ YoctoOrika.OrikaCore.process ] -',
-                                'Remove api return an invalid status  : ',
-                                utils.obj.inspect(validate.value.errors)
-                              ]);
-            // reject
-            deferred.reject(validate.value.errors || []);
-          }
+          // resolve with success response
+          deferred.resolve(validate.value);
         } else {
           // error message
           this.logger.error([ '[ YoctoOrika.OrikaCore.process ] -',

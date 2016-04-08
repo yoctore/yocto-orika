@@ -105,8 +105,7 @@ var modules = {
       response : {
         status  : 200,
         body    : {
-          status  : 0,
-          retour  : 0
+          status  : 0
         }
       }
     },
@@ -128,8 +127,7 @@ var modules = {
       response : {
         status  : 200,
         body    : {
-          status  : 0,
-          retour  : 0
+          status  : 105
         }
       }
     }
@@ -137,7 +135,7 @@ var modules = {
 };
 
 // process config before
-var req = nock('http://'+host);
+var req = nock('http://'+host+':6660');
 
 _.forOwn(modules, function (value, key) {
   _.forOwn(value, function (m, k) {

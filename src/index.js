@@ -17,7 +17,7 @@ function YoctoOrika (l) {
   this.config = {
     https   : false,
     host    : '',
-    port    : 80,
+    port    : 6660,
     user    : '',
     pwd     : ''
   };
@@ -87,8 +87,8 @@ YoctoOrika.prototype.init = function (user, password, host, port, https) {
     host  : joi.string().required().empty(),
     port  : joi.alternatives().when('https', {
       is        : true,
-      then      : 443,
-      otherwise : 80
+      then      : 6663,
+      otherwise : 6660
     }),
     user  : joi.string().required().empty(),
     pwd   : joi.string().required().empty()

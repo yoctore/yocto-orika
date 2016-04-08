@@ -2,6 +2,7 @@
 
 var logger    = require('yocto-logger');
 var _         = require('lodash');
+var Q         = require('q');
 
 /**
  * Default orkaisse module - Provide request to orkaisse endpoint
@@ -17,7 +18,7 @@ function Orkaisse (l) {
    *
    * @type {String}
    */
-  this.version  = '1.0.4';
+  this.version  = '1.0.6';
 
   /**
    * Default endpoint
@@ -138,9 +139,26 @@ Orkaisse.prototype.build = function (action, data) {
  * @return {Object} default promise to catch
  */
 Orkaisse.prototype.process = function (action, pre, data) {
+  // create a deferred process
+  var deferred = Q.defer();
   // default statement
-  return this.core.process(this.schema.get(action),
-    pre ? [ pre, action ].join('/') : action, this.endpoint, data);
+  this.core.process(this.schema.get(action),
+    pre ? [ pre, action ].join('/') : action, this.endpoint, data).then(function (success) {
+    // has error ?
+    if (_.includes(this.schema.getStatusCodes(true), success.status) && success.status !== 0) {
+      // log message
+      this.logger.error([ '[ Orkaisse.process ] - An error occured :',
+                          this.schema.getStatusCodesMessage(success.status) ].join(' '));
+    }
+    // resolve response
+    deferred.resolve(success);
+  }.bind(this)).catch(function (error) {
+    // reject process
+    deferred.reject(error);
+  });
+
+  // default promise
+  return deferred.promise;
 };
 
 // Default export

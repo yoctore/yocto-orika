@@ -13,7 +13,68 @@ function OrkaisseSchema (l) {
    * Default logger instance
    */
   this.logger   = l;
+  /**
+   * List of status codes
+   */
+  this.statusCodes  = [ {
+    code      : 0,
+    message   : 'Ok'
+  }, {
+    code      : 1,
+    message   : 'Erreur inconnue / interne'
+  }, {
+    code      : 100,
+    message   : 'Les formats des données reçues en entrée n\'est pas celui attendu.'
+  }, {
+    code      : 101,
+    message   : 'Article inconnu'
+  }, {
+    code      : 102,
+    message   : 'Numéro de client inconnu'
+  }, {
+    code      : 103,
+    message   : 'Coupon inconnu'
+  }, {
+    code      : 104,
+    message   : 'Code ticket inconnu'
+  }, {
+    code      : 105,
+    message   : [ 'Problème de montant, le montant reçu ne correspond',
+                              'pas à celui attendu pour le ticket' ].join(' ')
+  } ];
 }
+
+/**
+ * An utlity method to get only message from a status code number
+ *
+ * @param {Number} code current code to use to retreive default message
+ * @return {String} retreive message
+ */
+OrkaisseSchema.prototype.getStatusCodesMessage = function (code) {
+  // default statement
+  return _.get(_.find(this.statusCodes, function (s) {
+    // is wanted code ?
+    return s.code === code;
+  }), 'message') || [ 'Unkown message with given code :', code ].join(' ');
+};
+/**
+ * An utility method to get current defined status code on yocto orikaisse
+ *
+ * @param {Boolean} list if true return complete list
+ * @return {Array} list of status codes or only code is list
+ */
+OrkaisseSchema.prototype.getStatusCodes = function (list) {
+  // whant only list
+  if (list) {
+    // default statement for list request
+    return _.map(this.statusCodes, function (s) {
+      // return only code
+      return s.code;
+    });
+  }
+  // default statement
+  return this.statusCodes;
+};
 
 /**
  * Default method to retrieve validation schema
@@ -51,8 +112,7 @@ OrkaisseSchema.prototype.get = function (name) {
       }))
     },
     response  : {
-      status    : joi.number().required().valid([ 0, 1 ]),
-      retour    : joi.number().required().valid([ 0, 1, 2 ]),
+      status    : joi.number().required().valid(this.getStatusCodes(true)),
       idm       : joi.number().required().min(1),
       dt        : joi.date().required().format('YYYY-MM-DD'),
       idtrs     : joi.string().required().trim().empty(),
@@ -90,11 +150,11 @@ OrkaisseSchema.prototype.get = function (name) {
       },
       paid    : {
         request   : [ 'idm', 'dt', 'idtrs', 'idtkt', 'netttc', 'payments' ],
-        response  : [ 'status', 'retour' ]
+        response  : [ 'status' ]
       },
       cancel  : {
         request   : [ 'idm', 'dt', 'idtrs', 'idcli', 'idtkt' ],
-        response  : [ 'status', 'retour' ]
+        response  : [ 'status' ]
       }
     }
   };
