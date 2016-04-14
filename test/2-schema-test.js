@@ -28,7 +28,7 @@ var modules = {
       value : [ 'order', 'prepare', 'paid', 'cancel' ],
       items : {
         order   : [ 'idm', 'dt', 'idtrs', 'idcli', 'items', 'vouchers' ],
-        prepare : [ 'idm', 'dt', 'idtrs', 'idcli', 'idtkt', 'items', 'vouchers' ],
+        prepare : [ 'idm', 'dt', 'idtrs', 'idcli', 'items', 'vouchers' ],
         paid    : [ 'idm', 'dt', 'idtrs', 'idtkt', 'netttc', 'payments' ],
         cancel  : [ 'idm', 'dt', 'idtrs', 'idcli', 'idtkt' ]
       }
@@ -37,8 +37,8 @@ var modules = {
       label : 'Must contains keys gived on initial CIT (Response only)',
       value : [ 'order', 'prepare', 'paid', 'cancel' ],
       items : {
-        order   : [ 'status', 'idm', 'dt', 'idtrs', 'idcli', 'idtkt', 'netttc', 'netht', 'mntavg', 'items', 'lots' ],
-        prepare : [ 'status', 'idm', 'dt', 'idtrs', 'idcli', 'idtkt', 'netttc', 'netht', 'mntavg', 'items' ],
+        order   : [ 'status', 'data' ],
+        prepare : [ 'status', 'data' ],
         paid    : [ 'status' ],
         cancel  : [ 'status' ]
       }
@@ -80,7 +80,9 @@ describe('Schema ->', function() {
             // is for key === schema ?
             if (key === 'reqschema' || key === 'resschema') {
               // internal test key
+
               var ckey = (key === 'reqschema' ? 'request' : 'response');
+              //if (key === 'resschema') { console.log('r =>', utils.obj.inspect(result[ckey])) };
               // assertion test
               expect(result).to.be.not.boolean;
               chai.typeOf(result, 'object');
@@ -88,12 +90,7 @@ describe('Schema ->', function() {
               expect(result).to.have.property('request');
               expect(result).to.have.property('response');
 
-              // request test
-              _.each(modules[keys][key].items[m], function (i) {
-                expect(result[ckey]).to.have.property(i);
-                expect(Object.keys(result[ckey]))
-                  .to.have.length(modules[keys][key].items[m].length);
-              })
+
             }
           });
         });

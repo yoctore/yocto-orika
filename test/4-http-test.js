@@ -40,17 +40,55 @@ var modules = {
       response : {
         status  : 200,
         body    : {
-          status  : 0,
-          idm     : 1,
-          dt      : moment().format('YYYY-MM-DD'),
-          idtrs   : '123132',
-          idcli   : '1234567894561',
-          idtkt   : '111111111111111111111111',
-          netht   : 7.50,
-          netttc  : 8.89,
-          mntavg  : 2.36,
-          items   : [ { ean : '1234567894561', qte : 5, netht : 3.25, puvttc : 4.33, netttc : 1, mntavg : 3 } ],
-          lots    : [ { idlot : "3", articles : [ { ean : '1234567894561', qte : 1 } ] }  ]
+         "status": 0,
+         "data": {
+           "idtkt": "904140506383357026a5e98c",
+           "lots": [
+             {
+               "qte": 4,
+               "idlot": "4001181500003",
+               "ean": "1013790000005"
+             },
+             {
+               "qte": 2,
+               "idlot": "4001181500003",
+               "ean": "1035370000007"
+             }
+           ],
+           "items": [
+             {
+               "qte": 4,
+               "netttc": 140,
+               "ean": "1013790000005",
+               "netht": 75.88,
+               "mntavg": 46.67,
+               "puvttc": 35
+             },
+             {
+               "qte": 2,
+               "netttc": 70,
+               "ean": "1035370000007",
+               "netht": 37.94,
+               "mntavg": 23.33,
+               "puvttc": 35
+             },
+             {
+               "qte": 2,
+               "netttc": 60,
+               "ean": "1036550000008",
+               "netht": 48.78,
+               "mntavg": 0,
+               "puvttc": 30
+             }
+           ],
+           "idtrs": "57026a5e98c00a8c15282571",
+           "idcli": "1231231231230",
+           "idm": 70,
+           "mntavg": 70,
+           "netht": 162.6,
+           "dt": "2016-04-14",
+           "netttc": 200
+         }
         }
       }
     },
@@ -66,7 +104,6 @@ var modules = {
           dt    : moment().format('YYYY-MM-DD'),
           idtrs : '123132',
           idcli : '1234567894561',
-          idtkt : '111111111111111111111111',
           items : [ { ean : '1234567894561', qte : 5, puvttc : 1.40 } ]
         }
       },
@@ -74,15 +111,17 @@ var modules = {
         status  : 200,
         body    : {
           status  : 0,
-          idm     : 1,
-          dt      : moment().format('YYYY-MM-DD'),
-          idtrs   : '123132',
-          idcli   : '1234567894561',
-          idtkt   : '111111111111111111111111',
-          netttc  : 8.89,
-          netht   : 7.50,
-          mntavg  : 2.36,
-          items   : [ { ean : '1234567894561', qte : 5, netht : 3.25, puvttc : 4.33, netttc : 1, mntavg : 3 } ]
+          data : {
+            idm     : 1,
+            dt      : moment().format('YYYY-MM-DD'),
+            idtrs   : '123132',
+            idcli   : '1234567894561',
+            idtkt   : '111111111111111111111111',
+            netttc  : 8.89,
+            netht   : 7.50,
+            mntavg  : 2.36,
+            items   : [ { ean : '1234567894561', qte : 5, netht : 3.25, puvttc : 4.33, netttc : 1, mntavg : 3 } ]
+          }
         }
       }
     },

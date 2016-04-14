@@ -96,7 +96,7 @@ OrkaisseSchema.prototype.get = function (name) {
         qte         : joi.number().required().min(0),
         replacement : joi.array().min(1).items(joi.object().optional().keys({
           ean     : joi.string().required().trim().empty().min(13).max(13),
-          puvttc  : joi.number().required().min(0).precision(2),
+          puvttc  : joi.number().optional().min(0).precision(2),
           qte     : joi.number().required().min(0)
         })),
         puvttc      : joi.number().optional().min(0).precision(2)
@@ -124,29 +124,27 @@ OrkaisseSchema.prototype.get = function (name) {
       items     : joi.array().required().items(joi.object().required().keys({
         ean     : joi.string().required().trim().empty().min(13).max(13),
         qte     : joi.number().required().min(0),
-        puvttc  : joi.number().required().min(0).precision(2),
+        puvttc  : joi.number().optional().min(0).precision(2),
         netttc  : joi.number().required().min(0).precision(2),
         netht   : joi.number().required().min(0).precision(2),
         mntavg  : joi.number().required().min(0).precision(2)
       })),
       lots      : joi.array().optional().items(joi.object().required().keys({
-        idlot     : joi.string().required().trim().empty(),
-        articles  : joi.array().required().items(joi.object().required().keys({
-          ean : joi.string().required().trim().empty().min(13).max(13),
-          qte : joi.number().required().min(0)
-        }))
+        idlot   : joi.string().required().trim().empty(),
+        ean     : joi.string().required().trim().empty().min(13).max(13),
+        qte     : joi.number().required().min(0)
       }))
     },
     rules     : {
       order   : {
         request   : [ 'idm', 'dt', 'idtrs', 'idcli', 'items', 'vouchers' ],
         response  : [ 'status', 'idm', 'dt', 'idtrs', 'idcli',
-                      'idtkt', 'netttc', 'netht', 'mntavg', 'items', 'lots' ]
+                      'idtkt', 'netttc', 'netht', 'mntavg', 'items', 'lots', 'vouchers' ]
       },
       prepare : {
-        request   : [ 'idm', 'dt', 'idtrs', 'idcli', 'idtkt', 'items', 'vouchers' ],
+        request   : [ 'idm', 'dt', 'idtrs', 'idcli', 'items', 'vouchers' ],
         response  : [ 'status', 'idm', 'dt', 'idtrs', 'idcli',
-                      'idtkt', 'netttc', 'netht', 'mntavg', 'items' ]
+                      'idtkt', 'netttc', 'netht', 'mntavg', 'items', 'lots', 'vouchers' ]
       },
       paid    : {
         request   : [ 'idm', 'dt', 'idtrs', 'idtkt', 'netttc', 'payments' ],
@@ -168,10 +166,26 @@ OrkaisseSchema.prototype.get = function (name) {
     return false;
   }
 
+  // default object
+  var obj = {
+    data   : joi.object().required().keys(
+      _.pick(schemas.response, _.difference(_.values(schemas.rules[name].response), [ 'status' ])))
+  };
+
+  // extend correct object
+  _.extend(obj, _.pick(schemas.response,
+                _.intersection(schemas.rules[name].response, [ 'status' ])));
+
+  // is for cancel and paid request
+  if (name === 'cancel' || name === 'paid') {
+    // remove unused object
+    delete obj.data;
+  }
+
   // has key so process next process
   var schema = {
     request   : _.pick(schemas.request, schemas.rules[name].request),
-    response  : _.pick(schemas.response, schemas.rules[name].response)
+    response  : joi.object().required().keys(obj)
   };
 
   // default statement
