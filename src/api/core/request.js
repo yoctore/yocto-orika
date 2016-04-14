@@ -78,7 +78,11 @@ ApiRequest.prototype.process = function (host, endpoint, method, required, data)
       uri     : host,
       body    : data
     }, function (error, response, body) {
-      // test
+      // log response before validation
+      this.logger.debug([ '[ YoctoOrika.ApiRequest.process ] -',
+                          'Receiving response with data below :',
+                          utils.obj.inspect(body) ].join(' '));
+      // add test to check if all is ok for next process
       if (!error && response && _.has(response, 'statusCode') && response.statusCode === 200) {
         // return with correct data
         deferred.resolve(body);
