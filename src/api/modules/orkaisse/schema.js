@@ -157,6 +157,22 @@ OrkaisseSchema.prototype.get = function (name) {
     }
   };
 
+  // optionnal list rules for item
+  this.optionnalSchema = {
+    response : {
+      prepare : {
+        items     : joi.array().required().items(joi.object().required().keys({
+          ean     : joi.string().required().trim().empty().min(13).max(13),
+          qte     : joi.number().required(),
+          puvttc  : joi.number().optional().min(0).precision(2),
+          netttc  : joi.number().required().precision(2),
+          netht   : joi.number().required().precision(2),
+          mntavg  : joi.number().required().min(0).precision(2)
+        }))
+      }
+    }
+  };
+
   // now find correct schema and build data
   if (!_.has(schemas.rules, name)) {
     // error message
@@ -171,6 +187,17 @@ OrkaisseSchema.prototype.get = function (name) {
     data   : joi.object().required().keys(
       _.pick(schemas.response, _.difference(_.values(schemas.rules[name].response), [ 'status' ])))
   };
+
+  // we need to do this to override default schema with optionnal schema for a specific name rules
+  if (this.optionnalSchema.response[name]) {
+    // get picked
+    var picked = _.pick(schemas.response,
+                  _.difference(_.values(schemas.rules[name].response), [ 'status' ]));
+    // Merge picked data
+    _.merge(picked, this.optionnalSchema.response[name]);
+    // change object
+    obj.data = joi.object().required().keys(picked);
+  }
 
   // extend correct object
   _.extend(obj, _.pick(schemas.response,

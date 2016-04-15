@@ -110,17 +110,62 @@ var modules = {
       response : {
         status  : 200,
         body    : {
-          status  : 0,
-          data : {
-            idm     : 1,
-            dt      : moment().format('YYYY-MM-DD'),
-            idtrs   : '123132',
-            idcli   : '1234567894561',
-            idtkt   : '111111111111111111111111',
-            netttc  : 8.89,
-            netht   : 7.50,
-            mntavg  : 2.36,
-            items   : [ { ean : '1234567894561', qte : 5, netht : 3.25, puvttc : 4.33, netttc : 1, mntavg : 3 } ]
+          "status": 0,
+          "data": {
+            "idtkt": "904150100074957026a5e98c",
+            "lots": [
+              {
+                "qte": 3,
+                "idlot": "1000910017-2",
+                "ean": "3168930000679"
+              },
+              {
+                "qte": 1,
+                "idlot": "1000910017-2",
+                "ean": "7613032702410"
+              }
+            ],
+            "items": [
+              {
+                "qte": 1,
+                "netttc": 2.65,
+                "ean": "7613032702410",
+                "netht": 2.6,
+                "mntavg": 0,
+                "puvttc": 2.65
+              },
+              {
+                "qte": 3,
+                "netttc": 4.98,
+                "ean": "3168930000679",
+                "netht": 4.88,
+                "mntavg": 0,
+                "puvttc": 1.66
+              },
+              {
+                "qte": -3,
+                "netttc": -4.98,
+                "ean": "3168930000679",
+                "netht": -4.88,
+                "mntavg": 0,
+                "puvttc": 1.66
+              },
+              {
+                "qte": 3,
+                "netttc": 31.2,
+                "ean": "3168930000679",
+                "netht": 30.56,
+                "mntavg": 0,
+                "puvttc": 10.4
+              }
+            ],
+            "idtrs": "57026a5e98c00a8c15282572",
+            "idcli": "1231231231230",
+            "idm": 901,
+            "mntavg": 0,
+            "netht": 33.16,
+            "dt": "2016-04-15",
+            "netttc": 33.85
           }
         }
       }
