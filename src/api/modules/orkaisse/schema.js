@@ -109,7 +109,15 @@ OrkaisseSchema.prototype.get = function (name) {
       payments  : joi.array().required().items(joi.object().required().keys({
         idreg   : joi.number().required().min(1),
         mntttc  : joi.number().required().min(0).precision(2)
-      }))
+      })),
+      itemscond : joi.array().optional().items(
+        joi.object().required().keys({
+          ean     : joi.string().required().trim().empty().min(13).max(13),
+          qte     : joi.number().required().min(0),
+          cond    : joi.string().required().empty(),
+          mntcond : joi.number().optional().min(0).precision(2)
+        })
+      )
     },
     response  : {
       status    : joi.number().required().valid(this.getStatusCodes(true)),
@@ -137,9 +145,10 @@ OrkaisseSchema.prototype.get = function (name) {
     },
     rules     : {
       order   : {
-        request   : [ 'idm', 'dt', 'idtrs', 'idcli', 'items', 'vouchers' ],
+        request   : [ 'idm', 'dt', 'idtrs', 'idcli', 'items', 'vouchers', 'itemscond' ],
         response  : [ 'status', 'idm', 'dt', 'idtrs', 'idcli',
-                      'idtkt', 'netttc', 'netht', 'mntavg', 'items', 'lots', 'vouchers' ]
+                      'idtkt', 'netttc', 'netht', 'mntavg', 'items', 'lots', 'vouchers',
+                      'itemscond' ]
       },
       prepare : {
         request   : [ 'idm', 'dt', 'idtrs', 'idcli', 'items', 'vouchers' ],
