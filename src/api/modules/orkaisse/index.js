@@ -18,7 +18,7 @@ function Orkaisse (l) {
    *
    * @type {String}
    */
-  this.version  = '1.0.6';
+  this.version  = '1.0.10';
 
   /**
    * Default endpoint

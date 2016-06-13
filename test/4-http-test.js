@@ -62,7 +62,8 @@ var modules = {
                "ean": "1013790000005",
                "netht": 75.88,
                "mntavg": 46.67,
-               "puvttc": 35
+               "puvttc": 35,
+               "txtva": 0.085
              },
              {
                "qte": 2,
@@ -70,7 +71,8 @@ var modules = {
                "ean": "1035370000007",
                "netht": 37.94,
                "mntavg": 23.33,
-               "puvttc": 35
+               "puvttc": 35,
+               "txtva": 0.085
              },
              {
                "qte": 2,
@@ -78,7 +80,8 @@ var modules = {
                "ean": "1036550000008",
                "netht": 48.78,
                "mntavg": 0,
-               "puvttc": 30
+               "puvttc": 30,
+               "txtva": 0.085
              }
            ],
            "idtrs": "57026a5e98c00a8c15282571",
@@ -87,7 +90,14 @@ var modules = {
            "mntavg": 70,
            "netht": 162.6,
            "dt": "2016-04-14",
-           "netttc": 200
+           "netttc": 200,
+           "tva": [
+            {
+              "totalTTC": "5.00",
+              "taux": "8.50",
+              "totalHT": "4.61",
+              "montant": "0.39"
+            }]
          }
         }
       }
@@ -132,7 +142,8 @@ var modules = {
                 "ean": "7613032702410",
                 "netht": 2.6,
                 "mntavg": 0,
-                "puvttc": 2.65
+                "puvttc": 2.65,
+                "txtva": 0.085
               },
               {
                 "qte": 3,
@@ -140,7 +151,8 @@ var modules = {
                 "ean": "3168930000679",
                 "netht": 4.88,
                 "mntavg": 0,
-                "puvttc": 1.66
+                "puvttc": 1.66,
+                "txtva": 0.085
               },
               {
                 "qte": -3,
@@ -148,7 +160,8 @@ var modules = {
                 "ean": "3168930000679",
                 "netht": -4.88,
                 "mntavg": 0,
-                "puvttc": 1.66
+                "puvttc": 1.66,
+                "txtva": 0.085
               },
               {
                 "qte": 3,
@@ -156,7 +169,8 @@ var modules = {
                 "ean": "3168930000679",
                 "netht": 30.56,
                 "mntavg": 0,
-                "puvttc": 10.4
+                "puvttc": 10.4,
+                "txtva": 0.085
               }
             ],
             "idtrs": "57026a5e98c00a8c15282572",
@@ -165,7 +179,14 @@ var modules = {
             "mntavg": 0,
             "netht": 33.16,
             "dt": "2016-04-15",
-            "netttc": 33.85
+            "netttc": 33.85,
+            "tva": [
+            {
+              "totalTTC": "5.00",
+              "taux": "8.50",
+              "totalHT": "4.61",
+              "montant": "0.39"
+            }]
           }
         }
       }

@@ -135,12 +135,19 @@ OrkaisseSchema.prototype.get = function (name) {
         puvttc  : joi.number().optional().min(0).precision(2),
         netttc  : joi.number().required().min(0).precision(2),
         netht   : joi.number().required().min(0).precision(2),
-        mntavg  : joi.number().required().min(0).precision(2)
+        mntavg  : joi.number().required().min(0).precision(2),
+        txtva   : joi.number().required().min(0).precision(2)
       })),
       lots      : joi.array().optional().items(joi.object().required().keys({
         idlot   : joi.string().required().trim().empty(),
         ean     : joi.string().required().trim().empty().min(13).max(13),
         qte     : joi.number().required().min(0)
+      })),
+      tva       : joi.array().required().items(joi.object().required().keys({
+        taux      : joi.number().required().min(0).precision(2),
+        totalTTC  : joi.number().required().min(0).precision(2),
+        totalHT   : joi.number().required().min(0).precision(2),
+        montant   : joi.number().required().min(0).precision(2)
       }))
     },
     rules     : {
@@ -148,12 +155,12 @@ OrkaisseSchema.prototype.get = function (name) {
         request   : [ 'idm', 'dt', 'idtrs', 'idcli', 'items', 'vouchers', 'itemscond' ],
         response  : [ 'status', 'idm', 'dt', 'idtrs', 'idcli',
                       'idtkt', 'netttc', 'netht', 'mntavg', 'items', 'lots', 'vouchers',
-                      'itemscond' ]
+                      'itemscond', 'tva' ]
       },
       prepare : {
         request   : [ 'idm', 'dt', 'idtrs', 'idcli', 'items', 'vouchers' ],
         response  : [ 'status', 'idm', 'dt', 'idtrs', 'idcli',
-                      'idtkt', 'netttc', 'netht', 'mntavg', 'items', 'lots', 'vouchers' ]
+                      'idtkt', 'netttc', 'netht', 'mntavg', 'items', 'lots', 'vouchers', 'tva' ]
       },
       paid    : {
         request   : [ 'idm', 'dt', 'idtrs', 'idtkt', 'netttc', 'payments' ],
@@ -176,7 +183,8 @@ OrkaisseSchema.prototype.get = function (name) {
           puvttc  : joi.number().optional().min(0).precision(2),
           netttc  : joi.number().required().precision(2),
           netht   : joi.number().required().precision(2),
-          mntavg  : joi.number().required().min(0).precision(2)
+          mntavg  : joi.number().required().min(0).precision(2),
+          txtva   : joi.number().required().min(0).precision(2)
         }))
       }
     }
