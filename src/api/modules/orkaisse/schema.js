@@ -138,6 +138,14 @@ OrkaisseSchema.prototype.get = function (name) {
         mntavg  : joi.number().required().min(0).precision(2),
         txtva   : joi.number().required().min(0).precision(2)
       })),
+      itemscond : joi.array().optional().items(
+        joi.object().required().keys({
+          ean     : joi.string().required().trim().empty().min(13).max(13),
+          qte     : joi.number().required().min(0),
+          cond    : joi.string().required().empty(),
+          mntcond : joi.number().optional().min(0).precision(2)
+        })
+      ),
       lots      : joi.array().optional().items(joi.object().required().keys({
         idlot   : joi.string().required().trim().empty(),
         ean     : joi.string().required().trim().empty().min(13).max(13),

@@ -17,7 +17,13 @@ var config = {
         idm   : 1,
         idtrs : '123132',
         idcli : '1234567894561',
-        items : [ { ean : '1234567894561', qte : 5 } ]
+        items : [ { ean : '1234567894561', qte : 5 } ],
+        itemscond : [{
+          ean     : '2000000002057',
+          mntcond : 100,
+          cond    : 'maxnetttc',
+          qte     : 1
+        }]
       }
     },
     response : {
@@ -33,7 +39,7 @@ var config = {
         mntavg  : 2.36,
         netht   : 1.00,
         items   : [ { ean : '1234567894561', qte : 5,  puvttc : 4.33, netttc : 1, mntavg : 3, netht : 1.00 } ],
-        lots    : [ { idlot : "3", articles : [ { ean : '1234567894561', qte : 1 } ] }  ]
+        lots    : [ { idlot : '3', articles : [ { ean : '1234567894561', qte : 1 } ] }  ]
       }
     }
   }
