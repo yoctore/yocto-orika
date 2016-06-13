@@ -63,7 +63,8 @@ var modules = {
                "netht": 75.88,
                "mntavg": 46.67,
                "puvttc": 35,
-               "txtva": 0.085
+               "txtva": 0.085,
+               "mnttva": 0.84
              },
              {
                "qte": 2,
@@ -72,7 +73,8 @@ var modules = {
                "netht": 37.94,
                "mntavg": 23.33,
                "puvttc": 35,
-               "txtva": 0.085
+               "txtva": 0.085,
+               "mnttva": 0.84
              },
              {
                "qte": 2,
@@ -81,7 +83,8 @@ var modules = {
                "netht": 48.78,
                "mntavg": 0,
                "puvttc": 30,
-               "txtva": 0.085
+               "txtva": 0.085,
+               "mnttva": 0.84
              }
            ],
            "idtrs": "57026a5e98c00a8c15282571",
@@ -256,7 +259,6 @@ describe('Http ->', function() {
       expect(res).to.be.a('boolean');
       expect(res).equal(true);
     });
-  
     it('Expect app is ready before requests', function() {
       var res = api.isReady();
       expect(res).to.be.a('boolean');
