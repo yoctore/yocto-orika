@@ -102,7 +102,7 @@ OrkaisseSchema.prototype.get = function (name) {
         puvttc      : joi.number().optional().min(0).precision(2)
       })),
       vouchers  : joi.array().optional().items(joi.object().required().keys({
-        ean         : joi.string().required().trim().empty().min(13).max(13),
+        ean         : joi.string().required().trim().empty().min(8).max(128),
         typ         : joi.number().required().valid([ 0, 1 ])
       })),
       netttc    : joi.number().required().positive().precision(2),
