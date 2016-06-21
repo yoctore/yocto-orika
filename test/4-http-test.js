@@ -146,7 +146,8 @@ var modules = {
                 "netht": 2.6,
                 "mntavg": 0,
                 "puvttc": 2.65,
-                "txtva": 0.085
+                "txtva": 0.085,
+                "mnttva": 0.84
               },
               {
                 "qte": 3,
@@ -155,7 +156,8 @@ var modules = {
                 "netht": 4.88,
                 "mntavg": 0,
                 "puvttc": 1.66,
-                "txtva": 0.085
+                "txtva": 0.085,
+                "mnttva": 0.84
               },
               {
                 "qte": -3,
@@ -164,7 +166,8 @@ var modules = {
                 "netht": -4.88,
                 "mntavg": 0,
                 "puvttc": 1.66,
-                "txtva": 0.085
+                "txtva": 0.085,
+                "mnttva": 0.84
               },
               {
                 "qte": 3,
@@ -173,7 +176,8 @@ var modules = {
                 "netht": 30.56,
                 "mntavg": 0,
                 "puvttc": 10.4,
-                "txtva": 0.085
+                "txtva": 0.085,
+                "mnttva": 0.84
               }
             ],
             "idtrs": "57026a5e98c00a8c15282572",

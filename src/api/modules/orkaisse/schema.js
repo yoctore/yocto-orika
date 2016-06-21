@@ -193,7 +193,8 @@ OrkaisseSchema.prototype.get = function (name) {
           netttc  : joi.number().required().precision(2),
           netht   : joi.number().required().precision(2),
           mntavg  : joi.number().required().min(0).precision(2),
-          txtva   : joi.number().required().min(0).precision(2)
+          txtva   : joi.number().required().min(0).precision(2),
+          mnttva  : joi.number().required().min(0).precision(2)
         }))
       }
     }
