@@ -100,7 +100,14 @@ var modules = {
               "taux": "8.50",
               "totalHT": "4.61",
               "montant": "0.39"
-            }]
+            }],
+            "vouchers" : [
+              {
+                ean : "1234567891234",
+                typ : 1,
+                mnt : 659
+              }
+            ]
          }
         }
       }
@@ -193,7 +200,14 @@ var modules = {
               "taux": "8.50",
               "totalHT": "4.61",
               "montant": "0.39"
-            }]
+            }],
+            "vouchers" : [
+              {
+                ean : "1234567891234",
+                typ : 1,
+                mnt : 659
+              }
+            ]
           }
         }
       }

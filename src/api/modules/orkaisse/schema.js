@@ -157,7 +157,12 @@ OrkaisseSchema.prototype.get = function (name) {
         totalTTC  : joi.number().required().min(0).precision(2),
         totalHT   : joi.number().required().min(0).precision(2),
         montant   : joi.number().required().min(0).precision(2)
-      }))
+      })),
+      vouchers  : joi.array().optional().items(joi.object().required().keys({
+        ean         : joi.string().required().trim().empty().min(8).max(128),
+        typ         : joi.number().optional().valid([ 0, 1 ]),
+        mnt         : joi.number().optional().min(0).precision(2)
+      })),
     },
     rules     : {
       order   : {

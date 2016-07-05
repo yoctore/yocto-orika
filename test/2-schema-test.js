@@ -60,7 +60,7 @@ describe('Schema ->', function() {
         var r = require([ '../src/api/modules', keys.toLowerCase(), 'schema' ].join('/'))(logger);
         // parse method
         modules[keys][key].value.forEach(function(m) {
-          it([ 'For method :', utils.obj.inspect(m) ].join(' ') , function() { 
+          it([ 'For method :', utils.obj.inspect(m) ].join(' ') , function() {
             // get valid schema
             var result = r.get(m);
             // is for key === valid ?
@@ -89,8 +89,6 @@ describe('Schema ->', function() {
               expect(result).to.be.not.empty;
               expect(result).to.have.property('request');
               expect(result).to.have.property('response');
-
-
             }
           });
         });
