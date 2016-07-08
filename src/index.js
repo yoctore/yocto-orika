@@ -33,7 +33,8 @@ function YoctoOrika (l) {
    * Default included modules
    */
   this.modules = {
-    orkaisse : require('./api/modules/orkaisse/')(logger)
+    orkaisse : require('./api/modules/orkaisse/')(logger),
+    orkarte  : require('./api/modules/orkarte/')(logger)
   };
 }
 
@@ -159,6 +160,16 @@ YoctoOrika.prototype.isReady = function () {
 
   // default statement
   return true;
+};
+
+/**
+ * Default orkarte accessor
+ *
+ * @return {Object} current orkarte object
+ */
+YoctoOrika.prototype.orkarte = function () {
+  // default statement
+  return this.modules.orkarte;
 };
 
 /**

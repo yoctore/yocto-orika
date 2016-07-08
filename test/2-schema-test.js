@@ -43,6 +43,30 @@ var modules = {
         cancel  : [ 'status' ]
       }
     }
+  },
+  orkarte : {
+    valid   : {
+      label : 'Must be found / an object / have resquest & response property',
+      value : [ 'getClient' ]
+    },
+    invalid : {
+      label : 'Must be not found and return false statement',
+      value : utils.unit.generateTypeForUnitTests(null, 1)
+    },
+    reqschema : {
+      label : 'Must contains keys gived on initial CIT (Request only)',
+      value : [ 'getClient' ],
+      items : {
+        getClient   : [ 'idcli' ]
+      }
+    },
+    resschema : {
+      label : 'Must contains keys gived on initial CIT (Response only)',
+      value : [ 'getClient' ],
+      items : {
+        getClient   : [ 'status', 'data' ]
+      }
+    }
   }
 };
 

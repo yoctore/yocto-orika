@@ -5,9 +5,9 @@ var _         = require('lodash');
 var Q         = require('q');
 
 /**
- * Default orkaisse module - Provide request to orkaisse endpoint
+ * Default Orkarte module - Provide request to Orkarte endpoint
  */
-function Orkaisse (l) {
+function Orkarte (l) {
   /**
    * Default logger instance
    */
@@ -18,14 +18,14 @@ function Orkaisse (l) {
    *
    * @type {String}
    */
-  this.version  = '1.0.13';
+  this.version  = '1.0.17';
 
   /**
    * Default endpoint
    *
    * @type {String}
    */
-  this.endpoint = 'orkaisse/drive/api';
+  this.endpoint = 'orkarte/api';
 
   /**
    * Default module state
@@ -39,7 +39,7 @@ function Orkaisse (l) {
    */
   this.core    = require('../core')(l);
   /**
-   * Default orkaisse schema
+   * Default Orkarte schema
    */
   this.schema  = require('./schema')(l);
   /**
@@ -49,12 +49,12 @@ function Orkaisse (l) {
 }
 
 /**
- * Default init method to init orkaisse module
+ * Default init method to init Orkarte module
  *
  * @param {Object} config default config object to use on current api
  * @return {Boolean} true if all is ok false otherwise
  */
-Orkaisse.prototype.init = function (config) {
+Orkarte.prototype.init = function (config) {
   // default statement
   return this.core.init(config);
 };
@@ -64,53 +64,20 @@ Orkaisse.prototype.init = function (config) {
  *
  * @return {Boolean} true if module is ready to use false otherwise
  */
-Orkaisse.prototype.isReady = function () {
+Orkarte.prototype.isReady = function () {
   // default statement
   return this.state;
 };
 
 /**
- * Create / Update an order
+ * Get client by his reference
  *
  * @param {Object} data default data to send to api
  * @return {Object} default promise (success or error)
  */
-Orkaisse.prototype.order = function (data) {
+Orkarte.prototype.getClient = function (data) {
   // default statement
-  return this.process('order', null, data);
-};
-
-/**
- * Set ticket to prepare but no paid
- *
- * @param {Object} data default data to send to api
- * @return {Object} default promise (success or error)
- */
-Orkaisse.prototype.prepare = function (data) {
-  // default statement
-  return this.process('prepare', 'sale', data);
-};
-
-/**
- * Set receipt to paid but and retrived by client
- *
- * @param {Object} data default data to send to api
- * @return {Object} default promise (success or error)
- */
-Orkaisse.prototype.paid = function (data) {
-  // default statement
-  return this.process('paid', 'sale', data);
-};
-
-/**
- * Cancel a receipt
- *
- * @param {Object} data default data to send to api
- * @return {Object} default promise (success or error)
- */
-Orkaisse.prototype.cancel = function (data) {
-  // default statement
-  return this.process('cancel', 'sale', data);
+  return this.process('getClient', null, data);
 };
 
 /**
@@ -120,7 +87,7 @@ Orkaisse.prototype.cancel = function (data) {
  * @param {Object} data data to use for building
  * @return {Boolean|Object} false if an error occured, otherwise builded object
  */
-Orkaisse.prototype.build = function (action, data) {
+Orkarte.prototype.build = function (action, data) {
   // has given action ? and is a function ?
   if (_.isFunction(this.factory[action])) {
     // valid statement
@@ -138,16 +105,17 @@ Orkaisse.prototype.build = function (action, data) {
  * @param {Object} data data to use on given request
  * @return {Object} default promise to catch
  */
-Orkaisse.prototype.process = function (action, pre, data) {
+Orkarte.prototype.process = function (action, pre, data) {
   // create a deferred process
   var deferred = Q.defer();
+
   // default statement
-  this.core.process(this.schema.get(action),
-    pre ? [ pre, action ].join('/') : action, this.endpoint, data).then(function (success) {
+  this.core.process(this.schema.get(action), action, this.endpoint, data, true).then(
+  function (success) {
     // has error ?
     if (_.includes(this.schema.getStatusCodes(true), success.status) && success.status !== 0) {
       // log message
-      this.logger.error([ '[ Orkaisse.process ] - An error occured :',
+      this.logger.error([ '[ Orkarte.process ] - An error occured :',
                           this.schema.getStatusCodesMessage(success.status) ].join(' '));
     }
     // resolve response
@@ -166,12 +134,12 @@ module.exports = function (l) {
   // is a valid logger ?
   if (_.isUndefined(l) || _.isNull(l)) {
     // warning message
-    logger.warning([ '[ YoctoOrika.Orkaisse.constructor ] -',
+    logger.warning([ '[ YoctoOrika.Orkarte.constructor ] -',
                      'Invalid logger given. Use internal logger' ].join(' '));
     // assign
     l = logger;
   }
 
   // default statement
-  return new (Orkaisse)(l);
+  return new (Orkarte)(l);
 };
