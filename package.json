@@ -14,12 +14,20 @@
     {
       "name": "ROBERT Mathieu",
       "email": "mathieu@yocto.re"
+    },
+    {
+      "name": "BALARD Cédric",
+      "email": "cedric@yocto.re"
     }
   ],
   "maintainers": [
     {
       "name": "ROBERT Mathieu",
       "email": "mathieu@yocto.re"
+    },
+    {
+      "name": "BALARD Cédric",
+      "email": "cedric@yocto.re"
     }
   ],
   "license": "Apache-2.0",
@@ -49,7 +57,7 @@
   "dependencies": {
     "joi": "^8.4.2",
     "lodash": "^4.13.1",
-    "moment": "^2.13.0",
+    "moment": "^2.14.1",
     "q": "^1.4.1",
     "request": "^2.72.0",
     "yocto-logger": "^1.1.6",
@@ -57,11 +65,11 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "grunt": "^0.4.5",
-    "grunt-contrib-uglify": "^0.11.1",
+    "grunt": "^1.0.1",
+    "grunt-contrib-uglify": "^1.0.1",
     "grunt-mocha-cli": "^2.1.0",
-    "mocha-cli": "^1.0.0",
-    "nock": "^7.7.3",
+    "mocha-cli": "^1.0.1",
+    "nock": "^8.0.0",
     "yocto-hint": "^1.3.7"
   }
 }

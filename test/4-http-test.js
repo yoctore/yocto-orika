@@ -326,6 +326,29 @@ var modules = {
          }
         }
       }
+    },
+    updateClient : {
+      label   : 'Must be valid for an order request',
+      method  : 'updateClient',
+      url     : '/orkarte/api',
+      request : {
+        method : 'POST',
+        body : {
+          idcli   : '1234567894561',
+          nom     : 'toto',
+          prenom  : 'tata',
+          idtcrt  : 1,
+          idm     : 1,
+          email   : 'aaa@aaa.fr'
+        }
+      },
+      response : {
+        status    : 200,
+        body    : {
+          status  : 0,
+          data    : {}
+        }
+      }
     }
   }
 };

@@ -47,7 +47,7 @@ var modules = {
   orkarte : {
     valid   : {
       label : 'Must be found / an object / have resquest & response property',
-      value : [ 'getClient' ]
+      value : [ 'getClient', 'updateClient' ]
     },
     invalid : {
       label : 'Must be not found and return false statement',
@@ -57,14 +57,22 @@ var modules = {
       label : 'Must contains keys gived on initial CIT (Request only)',
       value : [ 'getClient' ],
       items : {
-        getClient   : [ 'idcli' ]
+        getClient     : [ 'idcli' ],
+        updateClient  : [ 'idcli', 'etat', 'idm', 'dtdist', 'nom', 'prenom', 'cin', 'civ', 'dtnai',
+                      'nenf', 'test', 'tel', 'tel2', 'gsm', 'fax', 'email', 'adr1', 'adr2', 'adr2',
+                      'adr3', 'cp', 'ville', 'pays', 'seg', 'phoning', 'phoning2', 'emailing',
+                      'emailing2', 'crtenv', 'pbadr', 'dblfam', 'envsms', 'envemail', 'sitfam',
+                      'com', 'dtcre', 'dtmod', 'catsoc', 'texting', 'texting2', 'soldem', 'soldep',
+                      'dtsolde', 'enfs', 'nfoyer', 'idmvis', 'tcpt', 'dcgne', 'pwd', 'cards',
+                      'idtcrt' ]
       }
     },
     resschema : {
       label : 'Must contains keys gived on initial CIT (Response only)',
-      value : [ 'getClient' ],
+      value : [ 'getClient', 'updateClient' ],
       items : {
-        getClient   : [ 'status', 'data' ]
+        getClient     : [ 'status', 'data' ],
+        updateClient  : [ 'status', 'data' ]
       }
     }
   }

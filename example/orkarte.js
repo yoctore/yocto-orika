@@ -22,6 +22,23 @@ var config = {
         test : false
       }
     }
+  },
+  updateClient : {
+    request : {
+      body : {
+        idcli   : '1234567891234',
+        nom     : 'toto',
+        prenom  : 'tata',
+        idm     : 1,
+        idtcrt  : 1
+      }
+    },
+    response : {
+      status : 200,
+      body : {
+        status : 0
+      }
+    }
   }
 };
 
@@ -47,6 +64,12 @@ if (api.init(user, password, host.replace('http://', ''))) {
     // }).catch(function (error) {
     //   console.log('e =>', error);
     // });
+
+    api.orkarte().updateClient(config.updateClient.request.body).then(function (success) {
+      console.log('s =>', success);
+    }).catch(function (error) {
+      console.log('e =>', error);
+    });
 
   }
 } else  {

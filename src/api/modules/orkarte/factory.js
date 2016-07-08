@@ -14,7 +14,7 @@ function OrkarteFactory (l) {
 }
 
 /**
- * Default factory method to build an order project
+ * Default factory method to build an method get client
  *
  * @param {String} client client identifier to use on current object
  * @return {Object} order object to use on request

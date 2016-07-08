@@ -66,7 +66,62 @@ OrkarteSchema.prototype.get = function (name) {
   // list of complete schema
   var schemas = {
     request   : {
-      idcli     : joi.string().required().empty()
+      idcli       : joi.string().required().empty(),
+      etat        : joi.number().integer().optional().min(0).max(1),
+      idtcrt      : joi.number().integer().required().min(0),
+      idm         : joi.number().required().min(1),
+      dtdist      : joi.date().optional().format('YYYY-MM-DD'),
+      nom         : joi.string().required().empty(),
+      prenom      : joi.string().required().empty(),
+      cin         : joi.string().optional().empty(),
+      civ         : joi.number().integer().optional().min(0).max(2),
+      dtnai       : joi.date().optional().format('YYYY-MM-DD'),
+      nenf        : joi.number().integer().optional().min(0),
+      test        : joi.number().integer().optional().min(0).max(1),
+      tel         : joi.string().optional().empty(),
+      tel2        : joi.string().optional().empty(),
+      gsm         : joi.string().optional().empty(),
+      fax         : joi.string().optional().empty(),
+      email       : joi.string().email().optional().empty(),
+      adr1        : joi.string().optional().empty(),
+      adr2        : joi.string().optional().empty(),
+      adr3        : joi.string().optional().empty(),
+      cp          : joi.string().optional().empty(),
+      ville       : joi.string().optional().empty(),
+      pays        : joi.string().optional().empty(),
+      seg         : joi.number().integer().optional(),
+      phoning     : joi.number().integer().optional().min(0).max(1),
+      phoning2    : joi.number().integer().optional().min(0).max(1),
+      emailing    : joi.number().integer().optional().min(0).max(1),
+      emailing2   : joi.number().integer().optional().min(0).max(1),
+      crtenv      : joi.number().integer().optional(),
+      pbadr       : joi.number().integer().optional(),
+      dblfam      : joi.number().integer().optional(),
+      envsms      : joi.number().integer().optional(),
+      envemail    : joi.number().integer().optional(),
+      sitfam      : joi.number().integer().optional().min(0).max(2),
+      com         : joi.string().optional().empty(),
+      dtcre       : joi.date().optional().format('YYYY-MM-DD hh:mm:ss'),
+      dtmod       : joi.date().optional().format('YYYY-MM-DD hh:mm:ss'),
+      catsoc      : joi.number().integer().optional(),
+      texting     : joi.number().integer().optional().min(0).max(1),
+      texting2    : joi.number().integer().optional().min(0).max(1),
+      soldem      : joi.number().integer().optional(),
+      soldep      : joi.number().integer().optional(),
+      dtsolde     : joi.date().optional().format('YYYY-MM-DD hh:mm:ss'),
+      enfs        : joi.array().items(
+        joi.object().keys({
+          sexe  : joi.number().integer().optional().min(1).max(2),
+          dtnai : joi.date().optional().format('YYYY-MM-DD')
+        })
+      ).optional(),
+      nfoyer      : joi.number().integer().optional(),
+      idmvis      : joi.number().integer().optional(),
+      tcpt        : joi.number().integer().optional().min(0).max(2),
+      dcgne       : joi.number().integer().optional().min(0).max(1),
+      pwd         : joi.string().optional().empty(),
+      // set any because the name of keys is dynamic
+      cards       : joi.any()
     },
     response  : {
       status      : joi.number().required().valid(this.getStatusCodes(true)),
@@ -128,15 +183,25 @@ OrkarteSchema.prototype.get = function (name) {
       cards       : joi.any().allow(null)
     },
     rules     : {
-      getClient   : {
-        request   : [ 'idcli' ],
-        response  : [ 'idcli', 'etat', 'idm', 'dtdist', 'nom', 'prenom', 'cin', 'civ', 'dtnai',
+      getClient     : {
+        request  : [ 'idcli' ],
+        response : [ 'idcli', 'etat', 'idm', 'dtdist', 'nom', 'prenom', 'cin', 'civ', 'dtnai',
                       'nenf', 'test', 'tel', 'tel2', 'gsm', 'fax', 'email', 'adr1', 'adr2', 'adr2',
                       'adr3', 'cp', 'ville', 'pays', 'seg', 'phoning', 'phoning2', 'emailing',
                       'emailing2', 'crtenv', 'pbadr', 'dblfam', 'envsms', 'envemail', 'sitfam',
                       'com', 'dtcre', 'dtmod', 'catsoc', 'texting', 'texting2', 'soldem', 'soldep',
                       'dtsolde', 'enfs', 'nfoyer', 'idmvis', 'tcpt', 'dcgne', 'pwd', 'cards',
                       'status', 'idtcrt' ]
+      },
+      updateClient  : {
+        request   : [ 'idcli', 'etat', 'idm', 'dtdist', 'nom', 'prenom', 'cin', 'civ', 'dtnai',
+                      'nenf', 'test', 'tel', 'tel2', 'gsm', 'fax', 'email', 'adr1', 'adr2', 'adr2',
+                      'adr3', 'cp', 'ville', 'pays', 'seg', 'phoning', 'phoning2', 'emailing',
+                      'emailing2', 'crtenv', 'pbadr', 'dblfam', 'envsms', 'envemail', 'sitfam',
+                      'com', 'dtcre', 'dtmod', 'catsoc', 'texting', 'texting2', 'soldem', 'soldep',
+                      'dtsolde', 'enfs', 'nfoyer', 'idmvis', 'tcpt', 'dcgne', 'pwd', 'cards',
+                      'idtcrt' ],
+        response  : [ 'status' ],
       }
     }
   };

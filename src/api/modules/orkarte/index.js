@@ -81,6 +81,17 @@ Orkarte.prototype.getClient = function (data) {
 };
 
 /**
+ * Update client by his reference
+ *
+ * @param {Object} data default data to send to api
+ * @return {Object} default promise (success or error)
+ */
+Orkarte.prototype.updateClient = function (data) {
+  // default statement
+  return this.process('updateClient', null, data);
+};
+
+/**
  * Default method to build an object from okaisse factory
  *
  * @param {String} action action to use for building
