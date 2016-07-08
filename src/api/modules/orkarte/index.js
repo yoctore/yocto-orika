@@ -121,7 +121,7 @@ Orkarte.prototype.process = function (action, pre, data) {
   var deferred = Q.defer();
 
   // default statement
-  this.core.process(this.schema.get(action), action, this.endpoint, data, true).then(
+  this.core.process(this.schema.get(action), action, this.endpoint, data, true, false).then(
   function (success) {
     // has error ?
     if (_.includes(this.schema.getStatusCodes(true), success.status) && success.status !== 0) {

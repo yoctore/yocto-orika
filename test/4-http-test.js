@@ -27,6 +27,7 @@ var modules = {
     order : {
       label   : 'Must be valid for an order request',
       method  : 'order',
+      methodInUrl : true,
       url     : '/orkaisse/drive/api',
       request : {
         method : 'POST',
@@ -115,6 +116,7 @@ var modules = {
     prepare : {
       label   : 'Must be valid for a prepare request',
       method  : 'prepare',
+      methodInUrl : true,
       sub     : 'sale',
       url     : '/orkaisse/drive/api',
       request : {
@@ -215,6 +217,7 @@ var modules = {
     paid : {
       label   : 'Must be valid for a paid request',
       method  : 'paid',
+      methodInUrl : true,
       sub     : 'sale',
       url     : '/orkaisse/drive/api',
       request : {
@@ -238,6 +241,7 @@ var modules = {
     cancel : {
       label   : 'Must be valid for a cancel request',
       method  : 'cancel',
+      methodInUrl : true,
       sub     : 'sale',
       url     : '/orkaisse/drive/api',
       request : {
@@ -262,6 +266,7 @@ var modules = {
     getClient : {
       label   : 'Must be valid for an order request',
       method  : 'getClient',
+      methodInUrl : false,
       url     : '/orkarte/api',
       request : {
         method : 'POST',
@@ -330,6 +335,7 @@ var modules = {
     updateClient : {
       label   : 'Must be valid for an order request',
       method  : 'updateClient',
+      methodInUrl : false,
       url     : '/orkarte/api',
       request : {
         method : 'POST',
@@ -358,7 +364,7 @@ var req = nock('http://'+host+':6660');
 
 _.forOwn(modules, function (value, key) {
   _.forOwn(value, function (m, k) {
-    req.intercept(_.compact([ m.url, m.sub || false, m.method ]).join('/'), m.request.method).reply(m.response.status, m.response.body);
+    req.intercept(_.compact([ m.url, m.sub || false, m.methodInUrl ? m.method : '' ]).join('/'), m.request.method).reply(m.response.status, m.response.body);
   });
 });
 
@@ -382,7 +388,7 @@ describe('Http ->', function() {
     _.forOwn(modules, function (ms, keys) {
       _.forOwn(ms, function (m, k) {
         it([ _.capitalize(keys), '->', k, ': Process a [', m.request.method, '] request on',
-            _.compact([ m.url, m.sub || false, m.method ]).join('/'),
+            _.compact([ m.url, m.sub || false, m.methodInUrl ? m.method : '' ]).join('/'),
             'must have a valid key for request and response and succeed to validator rules'
            ].join(' '), function(done) {
           // setup modules

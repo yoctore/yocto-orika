@@ -59,17 +59,17 @@ if (api.init(user, password, host.replace('http://', ''))) {
     // api.orkaisse().order(b);
 
     //console.log('build =>', api.orkaisse().build('order', {}));
-    // api.orkarte().getClient(config.getClient.request.body).then(function (success) {
-    //   console.log('s =>', success);
-    // }).catch(function (error) {
-    //   console.log('e =>', error);
-    // });
-
-    api.orkarte().updateClient(config.updateClient.request.body).then(function (success) {
+    api.orkarte().getClient(config.getClient.request.body).then(function (success) {
       console.log('s =>', success);
     }).catch(function (error) {
       console.log('e =>', error);
     });
+
+    // api.orkarte().updateClient(config.updateClient.request.body).then(function (success) {
+    //   console.log('s =>', success);
+    // }).catch(function (error) {
+    //   console.log('e =>', error);
+    // });
 
   }
 } else  {
