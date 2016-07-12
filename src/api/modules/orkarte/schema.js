@@ -4,6 +4,9 @@ var logger    = require('yocto-logger');
 var _         = require('lodash');
 var joi       = require('joi');
 
+var REGEXP_DATE = /^(\d{4})\-([0][1-9]|[1][0-2])\-([0][1-9]|[1-2][0-9]|[3][0-1])$/;
+var REGEXP_DATETIME = /^(\d{4})\-([0][1-9]|[1][0-2])\-([0][1-9]|[1-2][0-9]|[3][0-1]) ([0-1][0-9]|[2][0-3])\:([0-5][0-9])\:([0-5][0-9])$/;
+
 /**
  * Default Orkarte module - Provide request to Orkarte endpoint
  */
@@ -70,12 +73,12 @@ OrkarteSchema.prototype.get = function (name) {
       etat        : joi.number().integer().optional().min(0).max(1),
       idtcrt      : joi.number().integer().required().min(0),
       idm         : joi.number().required().min(1),
-      dtdist      : joi.date().format('YYYY-MM-DD').optional(),
+      dtdist      : joi.string().regex(REGEXP_DATE).optional(),
       nom         : joi.string().required().empty(),
       prenom      : joi.string().required().empty(),
       cin         : joi.string().optional().empty(),
       civ         : joi.number().integer().optional().min(0).max(2),
-      dtnai       : joi.date().format('YYYY-MM-DD').optional(),
+      dtnai       : joi.string().regex(REGEXP_DATE).optional(),
       nenf        : joi.number().integer().optional().min(0),
       test        : joi.number().integer().optional().min(0).max(1),
       tel         : joi.string().optional().empty(),
@@ -101,18 +104,18 @@ OrkarteSchema.prototype.get = function (name) {
       envemail    : joi.number().integer().optional(),
       sitfam      : joi.number().integer().optional().min(0).max(2),
       com         : joi.string().optional().empty(),
-      dtcre       : joi.date().format('YYYY-MM-DD HH:mm:ss').optional(),
-      dtmod       : joi.date().format('YYYY-MM-DD HH:mm:ss').optional(),
+      dtcre       : joi.string().regex(REGEXP_DATETIME).optional(),
+      dtmod       : joi.string().regex(REGEXP_DATETIME).optional(),
       catsoc      : joi.number().integer().optional(),
       texting     : joi.number().integer().optional().min(0).max(1),
       texting2    : joi.number().integer().optional().min(0).max(1),
       soldem      : joi.number().integer().optional(),
       soldep      : joi.number().integer().optional(),
-      dtsolde     : joi.date().format('YYYY-MM-DD HH:mm:ss').optional(),
+      dtsolde     : joi.string().regex(REGEXP_DATETIME).optional(),
       enfs        : joi.array().items(
         joi.object().keys({
           sexe  : joi.number().integer().optional().min(1).max(2),
-          dtnai : joi.date().format('YYYY-MM-DD').optional()
+          dtnai : joi.string().regex(REGEXP_DATE).optional()
         })
       ).optional(),
       nfoyer      : joi.number().integer().optional(),

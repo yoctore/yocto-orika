@@ -1,7 +1,7 @@
 {
   "name": "yocto-orika",
   "description": "An utility tools to mange request to orika API ",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "scripts": {
     "test": "grunt test"
   },

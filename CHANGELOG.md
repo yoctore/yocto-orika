@@ -1,3 +1,6 @@
+# 1.2.3 (2016-07-11)
+- Update joi rules for orkarte request : set regexp for date instead of use joi.date() because it's created native Date object
+
 # 1.2.2 (2016-07-11)
 - Update joi rules for orkarte request
 
