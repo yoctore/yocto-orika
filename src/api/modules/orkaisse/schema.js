@@ -89,7 +89,7 @@ OrkaisseSchema.prototype.get = function (name) {
       idm       : joi.number().required().min(1),
       dt        : joi.date().default(moment().format('YYYY-MM-DD')),
       idtrs     : joi.string().required().trim().empty(),
-      idcli     : joi.string().optional().trim().empty().min(13).max(13),
+      idcli     : joi.string().optional().trim().empty().min(13).max(14),
       idtkt     : joi.string().required().trim().empty().min(24).max(24),
       items     : joi.array().required().items(joi.object().required().keys({
         ean         : joi.string().required().trim().empty().min(13).max(13),
@@ -124,7 +124,7 @@ OrkaisseSchema.prototype.get = function (name) {
       idm       : joi.number().required().min(1),
       dt        : joi.date().required().format('YYYY-MM-DD'),
       idtrs     : joi.string().required().trim().empty(),
-      idcli     : joi.string().optional().trim().empty().min(13).max(13),
+      idcli     : joi.string().optional().trim().empty().min(13).max(14),
       idtkt     : joi.string().required().trim().empty().min(24).max(24),
       netttc    : joi.number().required().min(0).precision(2),
       netht     : joi.number().required().min(0).precision(2),
