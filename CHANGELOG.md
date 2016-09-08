@@ -1,3 +1,6 @@
+# 1.2.5 (2016-09-08)
+- Update joi rule for orkaisse : now items and tva can be empty
+
 # 1.2.4 (2016-07-11)
 - Update joi rules for orkarte request : length idcli is now 13 or 14 caracter
 

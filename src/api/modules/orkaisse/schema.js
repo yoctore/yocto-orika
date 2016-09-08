@@ -91,7 +91,7 @@ OrkaisseSchema.prototype.get = function (name) {
       idtrs     : joi.string().required().trim().empty(),
       idcli     : joi.string().optional().trim().empty().min(13).max(14),
       idtkt     : joi.string().required().trim().empty().min(24).max(24),
-      items     : joi.array().required().items(joi.object().required().keys({
+      items     : joi.array().optional().items(joi.object().optional().keys({
         ean         : joi.string().required().trim().empty().min(13).max(13),
         qte         : joi.number().required().min(0),
         replacement : joi.array().min(1).items(joi.object().optional().keys({
@@ -129,7 +129,7 @@ OrkaisseSchema.prototype.get = function (name) {
       netttc    : joi.number().required().min(0).precision(2),
       netht     : joi.number().required().min(0).precision(2),
       mntavg    : joi.number().required().min(0).precision(2),
-      items     : joi.array().required().items(joi.object().required().keys({
+      items     : joi.array().optional().items(joi.object().optional().keys({
         ean     : joi.string().required().trim().empty().min(13).max(13),
         qte     : joi.number().required().min(0),
         puvttc  : joi.number().optional().min(0).precision(2),
@@ -152,7 +152,7 @@ OrkaisseSchema.prototype.get = function (name) {
         ean     : joi.string().required().trim().empty().min(13).max(13),
         qte     : joi.number().required().min(0)
       })),
-      tva       : joi.array().required().items(joi.object().required().keys({
+      tva       : joi.array().optional().items(joi.object().optional().keys({
         taux      : joi.number().required().min(0).precision(2),
         totalTTC  : joi.number().required().min(0).precision(2),
         totalHT   : joi.number().required().min(0).precision(2),
