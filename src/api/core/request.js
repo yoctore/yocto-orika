@@ -27,9 +27,11 @@ function ApiRequest (l) {
 ApiRequest.prototype.prepare = function (host, data) {
   // default validation schema
   var schema = joi.object().keys({
-    user  : joi.string().required().empty(),
-    pwd   : joi.string().required().empty(),
-    data  : joi.object().required().min(1)
+    user    : joi.string().required().empty(),
+    pwd     : joi.string().required().empty(),
+    data    : joi.object().required().min(1),
+    // Used only for orkarte
+    action  : joi.string().optional().empty()
   }).allow([ 'user', 'pwd', 'data' ]);
 
   // validate currenr schema
@@ -56,14 +58,16 @@ ApiRequest.prototype.prepare = function (host, data) {
  * @param {String} method given method to use
  * @param {Object} required config params given by config class
  * @param {Object} data data to send on request
+ * @param {Boolean} methodInUrl Indicate if the method should be added into url
  * @return {Object} default promise to use on the end of request
  */
-ApiRequest.prototype.process = function (host, endpoint, method, required, data) {
+ApiRequest.prototype.process = function (host, endpoint, method, required, data, methodInUrl) {
   // create async process
   var deferred = Q.defer();
 
   // normalize host
-  host = [ host, endpoint, method ].join('/');
+  host = methodInUrl ? [ host, endpoint, method ].join('/') : [ host, endpoint ].join('/');
+
   // default merged data to use
   data = _.merge(_.clone(required), { data : data });
   // prepare request

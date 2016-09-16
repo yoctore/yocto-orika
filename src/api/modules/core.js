@@ -99,11 +99,16 @@ OrikaCore.prototype.isReady = function () {
  * @param {String} action action default action to use on core process
  * @param {String} endpoint endpoint to use on request
  * @param {Object} data data to use on given request
+ * @param {Boolean} extendAction indicate if action should be extend into request body
+ * @param {Boolean} methodInUrl Indicate if the method should be added into url
  * @return {Object} default promise to catch
  */
-OrikaCore.prototype.process = function (schema, action, endpoint, data) {
+OrikaCore.prototype.process = function (schema, action, endpoint, data, extendAction, methodInUrl) {
   // create defer process
   var deferred = Q.defer();
+  // initialize value
+  extendAction  = extendAction || false;
+  methodInUrl   = _.isUndefined(methodInUrl) ? true : methodInUrl;
 
   // is a valid schema ?
   if (schema) {
@@ -111,9 +116,13 @@ OrikaCore.prototype.process = function (schema, action, endpoint, data) {
     var validate = joi.validate(data, schema.request, { abortEarly : false });
     // no error ?
     if (!validate.error) {
+
       // process core request
       this.request.process(this.host, endpoint, action,
-                           this.required, validate.value).then(function (success) {
+      // check if action should be add in data (Used for Orkarte)
+      extendAction ? _.extend(this.required, {
+        action : action
+      }) : this.required, validate.value, methodInUrl).then(function (success) {
         // validate current schema
         validate = joi.validate(success, schema.response, { abortEarly : false });
 

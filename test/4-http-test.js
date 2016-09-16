@@ -27,6 +27,7 @@ var modules = {
     order : {
       label   : 'Must be valid for an order request',
       method  : 'order',
+      methodInUrl : true,
       url     : '/orkaisse/drive/api',
       request : {
         method : 'POST',
@@ -100,7 +101,14 @@ var modules = {
               "taux": "8.50",
               "totalHT": "4.61",
               "montant": "0.39"
-            }]
+            }],
+            "vouchers" : [
+              {
+                ean : "1234567891234",
+                typ : 1,
+                mnt : 659
+              }
+            ]
          }
         }
       }
@@ -108,6 +116,7 @@ var modules = {
     prepare : {
       label   : 'Must be valid for a prepare request',
       method  : 'prepare',
+      methodInUrl : true,
       sub     : 'sale',
       url     : '/orkaisse/drive/api',
       request : {
@@ -146,7 +155,8 @@ var modules = {
                 "netht": 2.6,
                 "mntavg": 0,
                 "puvttc": 2.65,
-                "txtva": 0.085
+                "txtva": 0.085,
+                "mnttva": 0.84
               },
               {
                 "qte": 3,
@@ -155,7 +165,8 @@ var modules = {
                 "netht": 4.88,
                 "mntavg": 0,
                 "puvttc": 1.66,
-                "txtva": 0.085
+                "txtva": 0.085,
+                "mnttva": 0.84
               },
               {
                 "qte": -3,
@@ -164,7 +175,8 @@ var modules = {
                 "netht": -4.88,
                 "mntavg": 0,
                 "puvttc": 1.66,
-                "txtva": 0.085
+                "txtva": 0.085,
+                "mnttva": 0.84
               },
               {
                 "qte": 3,
@@ -173,7 +185,8 @@ var modules = {
                 "netht": 30.56,
                 "mntavg": 0,
                 "puvttc": 10.4,
-                "txtva": 0.085
+                "txtva": 0.085,
+                "mnttva": 0.84
               }
             ],
             "idtrs": "57026a5e98c00a8c15282572",
@@ -189,7 +202,14 @@ var modules = {
               "taux": "8.50",
               "totalHT": "4.61",
               "montant": "0.39"
-            }]
+            }],
+            "vouchers" : [
+              {
+                ean : "1234567891234",
+                typ : 1,
+                mnt : 659
+              }
+            ]
           }
         }
       }
@@ -197,6 +217,7 @@ var modules = {
     paid : {
       label   : 'Must be valid for a paid request',
       method  : 'paid',
+      methodInUrl : true,
       sub     : 'sale',
       url     : '/orkaisse/drive/api',
       request : {
@@ -220,6 +241,7 @@ var modules = {
     cancel : {
       label   : 'Must be valid for a cancel request',
       method  : 'cancel',
+      methodInUrl : true,
       sub     : 'sale',
       url     : '/orkaisse/drive/api',
       request : {
@@ -239,6 +261,101 @@ var modules = {
         }
       }
     }
+  },
+  orkarte : {
+    getClient : {
+      label   : 'Must be valid for an order request',
+      method  : 'getClient',
+      methodInUrl : false,
+      url     : '/orkarte/api',
+      request : {
+        method : 'POST',
+        body : {
+          idcli : '1234567894561'
+        }
+      },
+      response : {
+        status  : 200,
+          body    : {
+          "status": 0,
+          "data": {
+          idcli      : "123456123456",
+          etat       : 1,
+          idm        : 11,
+          idtcrt     : 1,
+          dtdist     : '2016-04-08',
+          nom        : 'toto',
+          prenom     : 'tata',
+          cin        : '495635465',
+          civ        : 0,
+          dtnai      : '2016-04-08',
+          nenf       : 0,
+          test       : 0,
+          tel        : '0',
+          tel2       : '1',
+          gsm        : '11',
+          fax        : '11',
+          email      : 'aaa@aa.fr',
+          adr1       : '',
+          adr2       : '',
+          adr3       : '',
+          cp         : '',
+          ville      : 'tptp',
+          pays       : 'France',
+          seg        : 9,
+          phoning    : 1,
+          phoning2   : 1,
+          emailing   : 1,
+          emailing2  : 1,
+          crtenv     : 1,
+          pbadr      : 1,
+          dblfam     : 1,
+          envsms     : 1,
+          envemail   : 1,
+          sitfam     : 1,
+          com        : 'aa',
+          dtcre      : '2016-04-08 11:11:11',
+          dtmod      : '2016-04-08 11:11:11',
+          catsoc     : 4,
+          texting    : 0,
+          texting2   : 1,
+          soldem     : 5,
+          soldep     : 11,
+          dtsolde    : '2016-04-08 11:11:11',
+          enfs       : [],
+          nfoyer     : 1,
+          idmvis     : 1,
+          tcpt       : 1,
+          dcgne      : 1,
+          pwd        : 'aaaaa'
+         }
+        }
+      }
+    },
+    updateClient : {
+      label   : 'Must be valid for an order request',
+      method  : 'updateClient',
+      methodInUrl : false,
+      url     : '/orkarte/api',
+      request : {
+        method : 'POST',
+        body : {
+          idcli   : '1234567894561',
+          nom     : 'toto',
+          prenom  : 'tata',
+          idtcrt  : 1,
+          idm     : 1,
+          email   : 'aaa@aaa.fr'
+        }
+      },
+      response : {
+        status    : 200,
+        body    : {
+          status  : 0,
+          data    : {}
+        }
+      }
+    }
   }
 };
 
@@ -247,8 +364,8 @@ var req = nock('http://'+host+':6660');
 
 _.forOwn(modules, function (value, key) {
   _.forOwn(value, function (m, k) {
-    req.intercept(_.compact([ m.url, m.sub || false, m.method ]).join('/'), m.request.method).reply(m.response.status, m.response.body);
-  })
+    req.intercept(_.compact([ m.url, m.sub || false, m.methodInUrl ? m.method : '' ]).join('/'), m.request.method).reply(m.response.status, m.response.body);
+  });
 });
 
 // process schema
@@ -271,7 +388,7 @@ describe('Http ->', function() {
     _.forOwn(modules, function (ms, keys) {
       _.forOwn(ms, function (m, k) {
         it([ _.capitalize(keys), '->', k, ': Process a [', m.request.method, '] request on',
-            _.compact([ m.url, m.sub || false, m.method ]).join('/'),
+            _.compact([ m.url, m.sub || false, m.methodInUrl ? m.method : '' ]).join('/'),
             'must have a valid key for request and response and succeed to validator rules'
            ].join(' '), function(done) {
           // setup modules

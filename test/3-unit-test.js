@@ -1,7 +1,7 @@
 /**
  * Unit tests
  */
- 
+
 var chai    = require('chai').assert;
 var expect  = require('chai').expect;
 var _       = require('lodash');

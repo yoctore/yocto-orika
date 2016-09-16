@@ -48,6 +48,8 @@ var config = {
 var req = nock(host);
 
 _.forOwn(config, function (value, key) {
+
+  console.log( 'url inter : ', value.url)
   req.intercept(value.url, value.request.method).reply(value.response.status, value.response.body);
 });
 

@@ -29,6 +29,19 @@ var modules = {
         cancel  : [ 'idm', 'dt', 'idtrs', 'idcli', 'idtkt' ]
       }
     }
+  },
+  orkarte : {
+    valid   : {
+      label : 'Must be found / an object',
+      value : [ 'getClient' ]
+    },
+    objformat : {
+      label : 'Must contains keys given on initial CIT (Request only)',
+      value : [ 'getClient' ],
+      items : {
+        getClient   : [ 'idcli' ]
+      }
+    }
   }
 };
 
@@ -45,7 +58,7 @@ describe('Factory ->', function() {
         var r = require([ '../src/api/modules', keys.toLowerCase(), 'factory' ].join('/'))(logger);
         // parse method
         modules[keys][key].value.forEach(function(m) {
-          it([ 'For method :', utils.obj.inspect(m) ].join(' ') , function() { 
+          it([ 'For method :', utils.obj.inspect(m) ].join(' ') , function() {
             // function must exist
             expect(r[m]).to.be.a.function;
             // get valid schema
