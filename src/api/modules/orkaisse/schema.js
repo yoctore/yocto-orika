@@ -20,6 +20,9 @@ function OrkaisseSchema (l) {
     code      : 0,
     message   : 'Ok'
   }, {
+    code      : 2,
+    message   : 'Ticket non calculé'
+  }, {
     code      : 1,
     message   : 'Erreur inconnue / interne'
   }, {
