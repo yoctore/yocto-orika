@@ -29,7 +29,7 @@ var config = {
     response : {
       status  : 200,
       body    : {
-        status  : 0,
+        status  : 102,
         idm     : 1,
         dt      : moment().format('YYYY-MM-DD'),
         idtrs   : '123132',

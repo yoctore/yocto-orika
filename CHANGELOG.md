@@ -1,3 +1,6 @@
+# 1.2.7 (2016-09-27)
+- Update orkaisse log from new given code
+
 # 1.2.5 (2016-09-08)
 - Update joi rule for orkaisse : now items and tva can be empty
 

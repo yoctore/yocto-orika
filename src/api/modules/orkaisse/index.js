@@ -146,9 +146,14 @@ Orkaisse.prototype.process = function (action, pre, data) {
     pre ? [ pre, action ].join('/') : action, this.endpoint, data).then(function (success) {
     // has error ?
     if (_.includes(this.schema.getStatusCodes(true), success.status) && success.status !== 0) {
-      // log message
-      this.logger.error([ '[ Orkaisse.process ] - An error occured :',
-                          this.schema.getStatusCodesMessage(success.status) ].join(' '));
+      // is not skip by orika ?
+      if (success.status !== 2) {
+        // choose correct level
+        var level = success.status !== 102 ? 'error' : 'warning';
+        // log message
+        this.logger[level]([ '[ Orkaisse.process ] - An error occured :',
+                            this.schema.getStatusCodesMessage(success.status) ].join(' '));
+      }
     }
     // resolve response
     deferred.resolve(success);

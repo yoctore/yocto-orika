@@ -13,6 +13,7 @@ var orika   = require('../src')(logger);
 logger.disableConsole();
 
 // list of method config
+
 var methods = {
   versions : [ {
     label   : 'Must return an Object',

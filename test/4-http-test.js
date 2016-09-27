@@ -14,7 +14,6 @@ var api     = require('../src')(logger);
 // disable console
 logger.disableConsole();
 
-
 var host      = 'www.example.com';
 var user      = 'user';
 var password  = 'password';
@@ -41,7 +40,7 @@ var modules = {
       response : {
         status  : 200,
         body    : {
-         "status": 0,
+         "status": 102,
          "data": {
            "idtkt": "904140506383357026a5e98c",
            "lots": [
