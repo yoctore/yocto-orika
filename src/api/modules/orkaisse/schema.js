@@ -247,7 +247,8 @@ OrkaisseSchema.prototype.get = function (name) {
   // has key so process next process
   var schema = {
     request   : _.pick(schemas.request, schemas.rules[name].request),
-    response  : joi.object().required().keys(obj)
+    response  : joi.object().required().keys(obj),
+    optional  : joi.object().required().keys().unknown()
   };
 
   // default statement

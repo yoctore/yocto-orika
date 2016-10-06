@@ -123,6 +123,12 @@ OrikaCore.prototype.process = function (schema, action, endpoint, data, extendAc
       extendAction ? _.extend(this.required, {
         action : action
       }) : this.required, validate.value, methodInUrl).then(function (success) {
+        // is not calculated ticket status ?
+        if (success.status === 2) {
+          // change schema value for status code 2
+          schema.response = schema.optional;
+        }
+
         // validate current schema
         validate = joi.validate(success, schema.response, { abortEarly : false });
 
