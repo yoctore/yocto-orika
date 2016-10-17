@@ -1,3 +1,8 @@
+# 2.0.0 (2016-10-14)
+- Add new property for order and prepare service.
+- Update dependencies package, Joi, lodash.
+- Set adr1, adr2, adr3, cp property to optional with new strig validation
+
 # 1.2.7 (2016-09-27)
 - Update orkaisse log from new given code
 

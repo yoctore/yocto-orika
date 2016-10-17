@@ -132,6 +132,7 @@ OrkaisseSchema.prototype.get = function (name) {
       netttc    : joi.number().required().min(0).precision(2),
       netht     : joi.number().required().min(0).precision(2),
       mntavg    : joi.number().required().min(0).precision(2),
+      mntavgf   : joi.number().required().min(0).precision(2),
       items     : joi.array().optional().items(joi.object().optional().keys({
         ean     : joi.string().required().trim().empty().min(13).max(13),
         qte     : joi.number().required().min(0),
@@ -171,13 +172,14 @@ OrkaisseSchema.prototype.get = function (name) {
       order   : {
         request   : [ 'idm', 'dt', 'idtrs', 'idcli', 'items', 'vouchers', 'itemscond' ],
         response  : [ 'status', 'idm', 'dt', 'idtrs', 'idcli',
-                      'idtkt', 'netttc', 'netht', 'mntavg', 'items', 'lots', 'vouchers',
+                      'idtkt', 'netttc', 'netht', 'mntavg', 'mntavgf', 'items', 'lots', 'vouchers',
                       'itemscond', 'tva' ]
       },
       prepare : {
         request   : [ 'idm', 'dt', 'idtrs', 'idcli', 'items', 'vouchers' ],
         response  : [ 'status', 'idm', 'dt', 'idtrs', 'idcli',
-                      'idtkt', 'netttc', 'netht', 'mntavg', 'items', 'lots', 'vouchers', 'tva' ]
+                      'idtkt', 'netttc', 'netht', 'mntavg', 'mntavgf',
+                      'items', 'lots', 'vouchers', 'tva' ]
       },
       paid    : {
         request   : [ 'idm', 'dt', 'idtrs', 'idtkt', 'netttc', 'payments' ],
